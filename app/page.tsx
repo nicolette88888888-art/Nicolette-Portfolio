@@ -6,11 +6,11 @@ import Image from 'next/image'
 // Available images for bubbles
 const AVAILABLE_IMAGES = [
   '/images/DSCF1552.JPG',
-  '/images/DSCF1628.JPG',
+  '/images/IMG_7847.JPG',
   '/images/IMG_1359.JPG',
   '/images/IMG_6987.JPG',
   '/images/IMG_7771.JPG',
-  '/images/IMG_7847.JPG',
+  '/images/DSCF1628.JPG',
   '/images/IMG_7814.JPG',
   '/images/IMG_7841.JPG',
 ]
