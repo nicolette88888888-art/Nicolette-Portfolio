@@ -16,6 +16,15 @@ const AVAILABLE_IMAGES = [
   '/images/IMG_7841.JPG',
 ]
 
+function shuffleArray<T>(array: T[]): T[] {
+  const arr = [...array]
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[arr[i], arr[j]] = [arr[j], arr[i]]
+  }
+  return arr
+}
+
 const PROJECT_PLACEHOLDERS = [
   {
     title: 'Project 1',
@@ -62,13 +71,31 @@ function BubbleContainer() {
     lastTime: 0,
     velocities: [],
   })
+  const imageQueueRef = useRef<string[]>(shuffleArray(AVAILABLE_IMAGES))
   const nextIdRef = useRef(4)
   
-  const [bubbles, setBubbles] = useState(() => ([
-    { id: 1, x: -154, y: 20, vx: 0.50625, vy: 0.16875, size: 308, image: '/images/DSCF1552.JPG', hovered: false, squeezeX: 1, squeezeY: 1, squeezeIntensity: 0 },
-    { id: 2, x: 1000, y: 60, vx: -0.421875, vy: 0.253125, size: 280, image: '/images/IMG_1359.JPG', hovered: false, squeezeX: 1, squeezeY: 1, squeezeIntensity: 0 },
-    { id: 3, x: 30, y: -147, vx: 0.16875, vy: 0.50625, size: 294, image: '/images/IMG_6987.JPG', hovered: false, squeezeX: 1, squeezeY: 1, squeezeIntensity: 0 },
-  ]))
+  const getNextImage = () => {
+    if (imageQueueRef.current.length === 0) {
+      imageQueueRef.current = shuffleArray(AVAILABLE_IMAGES)
+    }
+    return imageQueueRef.current.pop()!
+  }
+  
+  const [bubbles, setBubbles] = useState(() => {
+    const templates = [
+      { id: 1, x: -154, y: 20, vx: 0.50625, vy: 0.16875, size: 308 },
+      { id: 2, x: 1000, y: 60, vx: -0.421875, vy: 0.253125, size: 280 },
+      { id: 3, x: 30, y: -147, vx: 0.16875, vy: 0.50625, size: 294 },
+    ]
+    return templates.map(template => ({
+      ...template,
+      image: getNextImage(),
+      hovered: false,
+      squeezeX: 1,
+      squeezeY: 1,
+      squeezeIntensity: 0,
+    }))
+  })
 
   // Add bubble function
   const addBubble = () => {
@@ -79,7 +106,7 @@ function BubbleContainer() {
     const randomY = randomSize / 2 + Math.random() * (window.innerHeight - randomSize)
     const randomVx = (Math.random() - 0.5) * 0.5
     const randomVy = (Math.random() - 0.5) * 0.5
-    const randomImage = AVAILABLE_IMAGES[Math.floor(Math.random() * AVAILABLE_IMAGES.length)]
+    const randomImage = getNextImage()
     
     setBubbles(prev => [...prev, {
       id: nextIdRef.current++,
