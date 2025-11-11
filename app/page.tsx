@@ -12,7 +12,6 @@ const AVAILABLE_IMAGES = [
   '/images/IMG_7771.JPG',
   '/images/IMG_7813.JPG',
   '/images/IMG_7814.JPG',
-  '/images/IMG_7841.JPG',
   '/images/IMG_7847.JPG',
 ]
 
