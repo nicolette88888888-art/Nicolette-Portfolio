@@ -1118,6 +1118,41 @@ export default function Home() {
               I enjoy creating short-form content and connecting with others. I have strong people skills and love collaborating with others. I am organized and manage my time well because I put care into everything I do.
             </p>
           </div>
+
+          {/* Philosophy */}
+          <div style={{
+            padding: '2rem',
+            borderRadius: '16px',
+            background: 'transparent',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+            border: '2px solid white',
+            transition: 'transform 0.3s, box-shadow 0.3s',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-5px)'
+            e.currentTarget.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.12)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)'
+            e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)'
+          }}
+          >
+            <h3 style={{
+              fontSize: '1.75rem',
+              fontWeight: '600',
+              marginBottom: '1rem',
+              color: '#ffffff',
+            }}>
+              Philosophy
+            </h3>
+            <p style={{
+              fontSize: '1.1rem',
+              lineHeight: '1.8',
+              color: '#ffffff',
+            }}>
+              I believe in focusing on the task at hand to achieve the larger goal I am working toward. Every setback offers something we can learn to help us grow and become better. What matters is not the setback itself, but what we do afterward.
+            </p>
+          </div>
         </div>
       </section>
 
