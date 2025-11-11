@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 
 // Available images for bubbles
 const AVAILABLE_IMAGES = [
@@ -558,10 +559,11 @@ function BubbleContainer() {
               overflow: 'hidden',
               background: '#fff',
             }}>
-              <img
+              <Image
                 src={bubble.image}
                 alt="Gallery"
-                draggable={false}
+                width={bubble.size}
+                height={bubble.size}
                 style={{
                   width: '100%',
                   height: '100%',
@@ -657,14 +659,14 @@ export default function Home() {
             e.currentTarget.style.boxShadow = '0 16px 48px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.3)'
             e.currentTarget.style.background = 'rgba(255, 255, 255, 0.25)'
             e.currentTarget.style.backdropFilter = 'blur(35px) saturate(180%)'
-            e.currentTarget.style.WebkitBackdropFilter = 'blur(35px) saturate(180%)'
+            ;(e.currentTarget.style as any).WebkitBackdropFilter = 'blur(35px) saturate(180%)'
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0) scale(1)'
             e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.2)'
             e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'
             e.currentTarget.style.backdropFilter = 'blur(30px) saturate(180%)'
-            e.currentTarget.style.WebkitBackdropFilter = 'blur(30px) saturate(180%)'
+            ;(e.currentTarget.style as any).WebkitBackdropFilter = 'blur(30px) saturate(180%)'
           }}
           >
             <h1 style={{
@@ -1108,9 +1110,11 @@ export default function Home() {
                   e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)'
                 }}
               >
-                <img
+                <Image
                   src={imagePath}
                   alt={`Gallery image ${index + 1}`}
+                  width={500}
+                  height={500}
                   style={{
                     width: '100%',
                     height: '100%',
