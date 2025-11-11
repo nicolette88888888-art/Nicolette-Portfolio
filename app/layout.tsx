@@ -5,6 +5,9 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'Nicolette Tandradinata - Creative Portfolio',
   description: 'Portfolio of Nicolette Tandradinata, Psychology and Advertising/Public Relations major at UNC Chapel Hill. Creative professional specializing in media creation, social media, and marketing.',
+  icons: {
+    icon: '/images/IMG_7847.JPG',
+  },
 }
 
 export default function RootLayout({

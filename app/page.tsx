@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 // Available images for bubbles
 const AVAILABLE_IMAGES = [
@@ -13,6 +14,29 @@ const AVAILABLE_IMAGES = [
   '/images/DSCF1628.JPG',
   '/images/IMG_7814.JPG',
   '/images/IMG_7841.JPG',
+]
+
+const PROJECT_PLACEHOLDERS = [
+  {
+    title: 'Project 1',
+    tagline: 'Coming Soon',
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    title: 'Project 2',
+    tagline: 'In Progress',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    title: 'Project 3',
+    tagline: 'Concept Stage',
+    image: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    title: 'Project 4',
+    tagline: 'Stay Tuned',
+    image: 'https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=1200&q=80',
+  },
 ]
 
 // Bubble component with physics and collision detection
@@ -40,23 +64,16 @@ function BubbleContainer() {
   })
   const nextIdRef = useRef(4)
   
-  const [bubbles, setBubbles] = useState(() => {
-    if (typeof window === 'undefined') {
-      return [
-        { id: 1, x: -154, y: 20, vx: 0.50625, vy: 0.16875, size: 308, image: '/images/DSCF1552.JPG', hovered: false, squeezeX: 1, squeezeY: 1, squeezeIntensity: 0 },
-        { id: 2, x: 1000, y: 60, vx: -0.421875, vy: 0.253125, size: 280, image: '/images/IMG_1359.JPG', hovered: false, squeezeX: 1, squeezeY: 1, squeezeIntensity: 0 },
-        { id: 3, x: 30, y: -147, vx: 0.16875, vy: 0.50625, size: 294, image: '/images/IMG_6987.JPG', hovered: false, squeezeX: 1, squeezeY: 1, squeezeIntensity: 0 },
-      ]
-    }
-    return [
-      { id: 1, x: -154, y: 20, vx: 0.50625, vy: 0.16875, size: 308, image: '/images/DSCF1552.JPG', hovered: false, squeezeX: 1, squeezeY: 1, squeezeIntensity: 0 },
-      { id: 2, x: window.innerWidth + 200, y: 60, vx: -0.421875, vy: 0.253125, size: 280, image: '/images/IMG_1359.JPG', hovered: false, squeezeX: 1, squeezeY: 1, squeezeIntensity: 0 },
-      { id: 3, x: 30, y: -147, vx: 0.16875, vy: 0.50625, size: 294, image: '/images/IMG_6987.JPG', hovered: false, squeezeX: 1, squeezeY: 1, squeezeIntensity: 0 },
-    ]
-  })
+  const [bubbles, setBubbles] = useState(() => ([
+    { id: 1, x: -154, y: 20, vx: 0.50625, vy: 0.16875, size: 308, image: '/images/DSCF1552.JPG', hovered: false, squeezeX: 1, squeezeY: 1, squeezeIntensity: 0 },
+    { id: 2, x: 1000, y: 60, vx: -0.421875, vy: 0.253125, size: 280, image: '/images/IMG_1359.JPG', hovered: false, squeezeX: 1, squeezeY: 1, squeezeIntensity: 0 },
+    { id: 3, x: 30, y: -147, vx: 0.16875, vy: 0.50625, size: 294, image: '/images/IMG_6987.JPG', hovered: false, squeezeX: 1, squeezeY: 1, squeezeIntensity: 0 },
+  ]))
 
   // Add bubble function
   const addBubble = () => {
+    if (bubbles.length >= 8) return // Cap at 8 bubbles
+    
     const randomSize = 250 + Math.random() * 150 // 250-400px
     const randomX = randomSize / 2 + Math.random() * (window.innerWidth - randomSize)
     const randomY = randomSize / 2 + Math.random() * (window.innerHeight - randomSize)
@@ -122,6 +139,7 @@ function BubbleContainer() {
 
     window.addEventListener('resize', handleResize)
 
+    let animationId: number | null = null
     const animate = () => {
       setBubbles(prevBubbles => {
         const newBubbles = prevBubbles.map(bubble => {
@@ -280,11 +298,12 @@ function BubbleContainer() {
 
         return newBubbles
       })
+      animationId = window.requestAnimationFrame(animate)
     }
 
-    const interval = setInterval(animate, 16) // ~60fps
+    animationId = window.requestAnimationFrame(animate)
     return () => {
-      clearInterval(interval)
+      if (animationId) cancelAnimationFrame(animationId)
       window.removeEventListener('resize', handleResize)
     }
   }, [dragState.isDragging, dragState.bubbleId])
@@ -392,8 +411,8 @@ function BubbleContainer() {
     <>
       {/* Collapsible Menu */}
       <div style={{
-        position: 'fixed',
-        top: '80px',
+        position: 'absolute',
+        top: '110px',
         right: '20px',
         zIndex: 1001,
         display: 'flex',
@@ -444,30 +463,43 @@ function BubbleContainer() {
           <>
             <button
               onClick={addBubble}
+              disabled={bubbles.length >= 8}
               style={{
                 width: '50px',
                 height: '50px',
                 borderRadius: '50%',
-                background: 'rgba(76, 175, 80, 0.9)',
+                background: bubbles.length >= 8 ? 'rgba(158, 158, 158, 0.5)' : 'rgba(76, 175, 80, 0.9)',
                 backdropFilter: 'blur(10px)',
-                border: '2px solid rgba(76, 175, 80, 0.5)',
-                cursor: 'pointer',
+                border: bubbles.length >= 8 ? '2px solid rgba(158, 158, 158, 0.3)' : '2px solid rgba(76, 175, 80, 0.5)',
+                cursor: bubbles.length >= 8 ? 'not-allowed' : 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
+                boxShadow: bubbles.length >= 8 
+                  ? '0 2px 8px rgba(0, 0, 0, 0.1)' 
+                  : '0 4px 15px rgba(76, 175, 80, 0.3)',
                 transition: 'all 0.3s ease',
                 color: 'white',
                 fontSize: '24px',
                 fontWeight: 'bold',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'scale(1.1)'
-                e.currentTarget.style.background = 'rgba(76, 175, 80, 1)'
+                if (bubbles.length < 8) {
+                  e.currentTarget.style.transform = 'scale(1.15) rotate(90deg)'
+                  e.currentTarget.style.background = 'rgba(76, 175, 80, 1)'
+                  e.currentTarget.style.boxShadow = '0 6px 20px rgba(76, 175, 80, 0.5), 0 0 20px rgba(76, 175, 80, 0.3)'
+                  e.currentTarget.style.borderColor = 'rgba(76, 175, 80, 0.8)'
+                }
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'scale(1)'
-                e.currentTarget.style.background = 'rgba(76, 175, 80, 0.9)'
+                e.currentTarget.style.transform = 'scale(1) rotate(0deg)'
+                e.currentTarget.style.background = bubbles.length >= 8 ? 'rgba(158, 158, 158, 0.5)' : 'rgba(76, 175, 80, 0.9)'
+                e.currentTarget.style.boxShadow = bubbles.length >= 8 
+                  ? '0 2px 8px rgba(0, 0, 0, 0.1)' 
+                  : '0 4px 15px rgba(76, 175, 80, 0.3)'
+                e.currentTarget.style.borderColor = bubbles.length >= 8 
+                  ? 'rgba(158, 158, 158, 0.3)' 
+                  : 'rgba(76, 175, 80, 0.5)'
               }}
             >
               +
@@ -533,12 +565,13 @@ function BubbleContainer() {
               height: `${bubble.size}px`,
               left: `${bubble.x}px`,
               top: `${bubble.y}px`,
-              transform: `translate(-50%, -50%) scaleX(${bubble.squeezeX}) scaleY(${bubble.squeezeY}) ${bubble.hovered && !dragState.isDragging ? 'scale(1.1)' : ''}`,
+              transform: `translate(-50%, -50%) translateZ(0) scaleX(${bubble.squeezeX}) scaleY(${bubble.squeezeY}) ${bubble.hovered && !dragState.isDragging ? 'scale(1.1)' : ''}`,
               borderRadius: '50%',
               background: 'rgba(255, 255, 255, 0.15)',
               backdropFilter: 'blur(25px)',
               border: '4px solid rgba(255, 255, 255, 0.3)',
               padding: '12px',
+              willChange: 'transform, left, top',
               boxShadow: bubble.hovered && !dragState.isDragging
                 ? '0 0 40px rgba(255, 255, 255, 0.6), 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.2)'
                 : '0 0 20px rgba(255, 255, 255, 0.3), 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.1)',
@@ -578,6 +611,20 @@ function BubbleContainer() {
 }
 
 export default function Home() {
+  const [navAnimated, setNavAnimated] = useState(false)
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setNavAnimated(true))
+    return () => cancelAnimationFrame(frame)
+  }, [])
+
+  const navLinks = [
+    { href: '#about', label: 'About' },
+    { href: '#projects', label: 'Projects' },
+    { href: '#gallery', label: 'Gallery' },
+    { href: '#contact', label: 'Contact' },
+  ]
+
   return (
     <>
       {/* Navigation */}
@@ -598,25 +645,86 @@ export default function Home() {
           justifyContent: 'space-between',
           alignItems: 'center',
         }}>
-          <a href="#home" style={{
-            fontSize: '1.5rem',
-            fontWeight: '700',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
           }}>
-            Nicolette Tandradinata
-          </a>
+            <div style={{
+              width: '64px',
+              height: '64px',
+              borderRadius: '50%',
+              padding: '8px',
+              background: 'rgba(255, 255, 255, 0.15)',
+              backdropFilter: 'blur(25px)',
+              border: '2px solid rgba(255, 255, 255, 0.3)',
+              boxShadow: '0 0 20px rgba(255, 255, 255, 0.3), 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.1)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              overflow: 'hidden',
+            }}>
+              <div style={{
+                width: '100%',
+                height: '100%',
+                borderRadius: '50%',
+                overflow: 'hidden',
+                background: '#fff',
+              }}>
+                <Image
+                  src="/images/IMG_7847.JPG"
+                  alt="Nicolette Tandradinata icon"
+                  width={48}
+                  height={48}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                  priority
+                />
+              </div>
+            </div>
+            <a
+              href="#home"
+              style={{
+                fontSize: '1.5rem',
+                fontWeight: '700',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                backgroundSize: '200% 200%',
+                letterSpacing: '0.02em',
+                ...(navAnimated
+                  ? { animation: 'navBrandReveal 1.2s ease forwards' }
+                  : { opacity: 0, transform: 'translateY(-12px)' }),
+              }}
+            >
+              Nicolette Tandradinata
+            </a>
+          </div>
           <div style={{
             display: 'flex',
             gap: '2rem',
             flexWrap: 'wrap',
           }}>
-            <a href="#about" style={{ color: '#333', fontWeight: '500', transition: 'color 0.3s' }}>About</a>
-            <a href="#projects" style={{ color: '#333', fontWeight: '500', transition: 'color 0.3s' }}>Projects</a>
-            <a href="#gallery" style={{ color: '#333', fontWeight: '500', transition: 'color 0.3s' }}>Gallery</a>
-            <a href="#contact" style={{ color: '#333', fontWeight: '500', transition: 'color 0.3s' }}>Contact</a>
+            {navLinks.map((link, index) => (
+              <a
+                key={link.href}
+                href={link.href}
+                style={{
+                  color: '#333',
+                  fontWeight: '500',
+                  transition: 'color 0.3s',
+                  ...(navAnimated
+                    ? { animation: `navLinkReveal 0.6s ease ${0.2 + index * 0.1}s forwards` }
+                    : { opacity: 0, transform: 'translateY(-12px)' }),
+                }}
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
       </nav>
@@ -1014,43 +1122,124 @@ export default function Home() {
           }}>
             Projects
           </h2>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2rem',
-          }}>
-            <div style={{
-              padding: '2rem',
-              borderRadius: '16px',
-              background: '#ffffff',
-              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-              transition: 'transform 0.3s, box-shadow 0.3s',
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gap: '2.5rem',
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-5px)'
-              e.currentTarget.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.15)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)'
-              e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)'
-            }}
-            >
-              <h3 style={{
-                fontSize: '1.5rem',
-                fontWeight: '600',
-                marginBottom: '1rem',
-                color: '#333',
-              }}>
-                Social Media Internship
-              </h3>
-              <p style={{
-                fontSize: '1rem',
-                lineHeight: '1.6',
-                color: '#555',
-              }}>
-                Working as a social media intern for a non-profit organization, promoting free health care clinics and volunteer opportunities to the community through video editing and graphic design.
-              </p>
-            </div>
+          >
+            {PROJECT_PLACEHOLDERS.map((project, index) => {
+              const slug = `/projects/project-${index + 1}`
+              return (
+              <Link
+                key={project.title}
+                href={slug}
+                style={{
+                  textDecoration: 'none',
+                }}
+                aria-label={`${project.title} details`}
+              >
+                <div
+                  style={{
+                    position: 'relative',
+                    borderRadius: '24px',
+                    overflow: 'hidden',
+                    border: '2px solid rgba(255, 255, 255, 0.3)',
+                    background: 'rgba(255, 255, 255, 0.15)',
+                    backdropFilter: 'blur(12px)',
+                    minHeight: '280px',
+                    display: 'flex',
+                    alignItems: 'flex-end',
+                    padding: '2rem',
+                    boxShadow: '0 12px 45px rgba(26, 45, 101, 0.2)',
+                    transition: 'transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease',
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => {
+                    const card = e.currentTarget as HTMLDivElement
+                    card.style.transform = 'translateY(-12px)'
+                    card.style.boxShadow = '0 18px 50px rgba(26, 45, 101, 0.32)'
+                    card.style.borderColor = 'rgba(255, 255, 255, 0.55)'
+                    const imageLayer = card.querySelector<HTMLDivElement>('.project-image-layer')
+                    if (imageLayer) {
+                      imageLayer.style.transform = 'scale(1.08)'
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    const card = e.currentTarget as HTMLDivElement
+                    card.style.transform = 'translateY(0)'
+                    card.style.boxShadow = '0 12px 45px rgba(26, 45, 101, 0.2)'
+                    card.style.borderColor = 'rgba(255, 255, 255, 0.3)'
+                    const imageLayer = card.querySelector<HTMLDivElement>('.project-image-layer')
+                    if (imageLayer) {
+                      imageLayer.style.transform = 'scale(1)'
+                    }
+                  }}
+                >
+                  <div
+                    className="project-image-layer"
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      backgroundImage: `url(${project.image})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      filter: 'brightness(0.75)',
+                      transition: 'transform 0.6s ease',
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'linear-gradient(135deg, rgba(15, 32, 72, 0.35), rgba(102, 126, 234, 0.4))',
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: 'relative',
+                      zIndex: 1,
+                      color: '#ffffff',
+                    }}
+                  >
+                    <p
+                      style={{
+                        letterSpacing: '0.08em',
+                        textTransform: 'uppercase',
+                        fontSize: '0.9rem',
+                        marginBottom: '0.5rem',
+                        opacity: 0.85,
+                      }}
+                    >
+                      {project.tagline}
+                    </p>
+                    <h3
+                      style={{
+                        fontSize: '1.8rem',
+                        fontWeight: 600,
+                        margin: 0,
+                      }}
+                    >
+                      {project.title}
+                    </h3>
+                  </div>
+                  <span
+                    style={{
+                      position: 'absolute',
+                      top: '1rem',
+                      right: '1.5rem',
+                      fontSize: '3rem',
+                      fontWeight: 700,
+                      color: 'rgba(255, 255, 255, 0.25)',
+                      lineHeight: 1,
+                    }}
+                  >
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                </div>
+              </Link>
+            )})}
           </div>
         </div>
       </section>
@@ -1229,6 +1418,41 @@ export default function Home() {
               </svg>
             </a>
 
+            {/* Pinterest Icon */}
+            <a
+              href="https://www.pinterest.com/nicolettetand/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                width: '60px',
+                height: '60px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'rgba(255, 255, 255, 0.15)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '50%',
+                border: '2px solid rgba(255, 255, 255, 0.3)',
+                transition: 'all 0.3s',
+                cursor: 'pointer',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.25)'
+                e.currentTarget.style.transform = 'translateY(-5px) scale(1.1)'
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.5)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'
+                e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)'
+              }}
+              aria-label="Pinterest"
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.18 2 11.5c0 3.77 2.8 6.97 6.66 7.73-.09-.64-.17-1.63.03-2.33.19-.65 1.22-4.16 1.22-4.16s-.31-.62-.31-1.53c0-1.43.83-2.49 1.87-2.49.88 0 1.3.66 1.3 1.45 0 .88-.56 2.2-.85 3.42-.24 1 .5 1.82 1.49 1.82 1.79 0 3.16-1.88 3.16-4.59 0-2.4-1.73-4.08-4.2-4.08-2.86 0-4.55 2.15-4.55 4.37 0 .87.33 1.8.74 2.31.08.09.09.18.07.28-.07.31-.24.99-.27 1.13-.04.18-.15.24-.33.14-1.24-.58-2.01-2.38-2.01-3.83 0-3.12 2.27-5.98 6.54-5.98 3.43 0 6.1 2.44 6.1 5.71 0 3.41-2.15 6.16-5.13 6.16-1 0-1.95-.52-2.27-1.12l-.62 2.36c-.22.83-.82 1.87-1.23 2.5.92.29 1.9.45 2.91.45 5.52 0 10-4.18 10-9.5S17.52 2 12 2z" fill="white"/>
+              </svg>
+            </a>
+
             {/* LinkedIn Icon */}
             <a
               href="https://www.linkedin.com/in/nicolette-tandradinata-socialmedia/"
@@ -1378,6 +1602,32 @@ export default function Home() {
           100% {
             transform: translate(30%, calc(100vh + 500px)) scale(0.75);
             opacity: 0;
+          }
+        }
+
+        @keyframes navBrandReveal {
+          0% {
+            opacity: 0;
+            transform: translateY(-12px);
+            background-position: 0% 50%;
+            letter-spacing: 0.24em;
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+            background-position: 100% 50%;
+            letter-spacing: 0.02em;
+          }
+        }
+
+        @keyframes navLinkReveal {
+          0% {
+            opacity: 0;
+            transform: translateY(-12px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
           }
         }
 
