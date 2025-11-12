@@ -2,6 +2,10 @@
 
 A modern, responsive portfolio website showcasing the work and background of Nicolette Tandradinata, a Psychology and Advertising/Public Relations major at UNC Chapel Hill.
 
+**🌐 Live Portfolio**: [View Portfolio](https://nicolette88888888-art.github.io/Nicolette-Portfolio/) (or your deployed URL)
+
+**👨‍💻 Built with**: This portfolio was created with the assistance of [Cursor](https://cursor.sh/) AI coding assistant (Auto) - an AI-powered development tool that helps bring creative visions to life through code.
+
 ## 🚀 Features
 
 - **Modern Design**: Beautiful gradient-based UI with smooth animations and transitions
@@ -166,6 +170,7 @@ This project is private and proprietary. All rights reserved.
 
 - Built with [Next.js](https://nextjs.org/)
 - Styled with modern CSS and React
+- Created with assistance from [Cursor](https://cursor.sh/) AI coding assistant (Auto)
 - Deployed with love and attention to detail
 
 ---

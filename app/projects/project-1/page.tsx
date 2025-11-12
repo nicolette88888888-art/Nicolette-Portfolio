@@ -2,23 +2,26 @@
 
 import React from 'react'
 import ProjectPageTemplate from '../ProjectPageTemplate'
+import { getPrimaryVideo, getProjectImages, getAdditionalVideos } from '../projectFiles'
 
 export default function ProjectOnePage() {
+  const videoSrc = getPrimaryVideo(1) || ''
+  const imageSources = getProjectImages(1)
+  const additionalVideos = getAdditionalVideos(1)
+
   return (
     <ProjectPageTemplate
-      title="Project 1"
-      tagline="Coming Soon"
-      videoSrc="https://www.w3schools.com/html/mov_bbb.mp4"
-      imageSources={[
-        'https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
-      ]}
-      aboutText="A short blurb about what this project is, goals, and your role. Replace these placeholders with real content."
+      title="Uganda Health Clinic Campaign"
+      tagline="Non-Profit Social Media & Design"
+      videoSrc={videoSrc}
+      imageSources={imageSources}
+      additionalVideos={additionalVideos}
+      aboutText="As a social media intern for a non-profit organization, I created promotional content to raise awareness about free health care clinics and volunteer opportunities in the community. This project involved developing engaging video content and designing promotional flyers to reach underserved communities and encourage participation in health services. The campaign focused on making healthcare accessible and visible to those who need it most, combining compelling visuals with clear messaging to drive community engagement."
       details={[
-        'Objective: Showcase creativity and storytelling',
-        'Role: Editor, Designer',
-        'Tools: Adobe Suite, Mobile Editing',
+        'Objective: Promote free health care clinics and volunteer opportunities',
+        'Role: Social Media Intern, Video Editor, Graphic Designer',
+        'Tools: Video Editing Software, Graphic Design Tools',
+        'Impact: Increased awareness and participation in community health services',
       ]}
     />
   )

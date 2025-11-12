@@ -2,23 +2,36 @@
 
 import React from 'react'
 import ProjectPageTemplate from '../ProjectPageTemplate'
+import { getPrimaryVideo, getProjectImages, getAdditionalVideos } from '../projectFiles'
 
 export default function ProjectThreePage() {
+  const videoSrc = getPrimaryVideo(3) || ''
+  const imageSources = getProjectImages(3)
+  const additionalVideos = getAdditionalVideos(3)
+
+  // TikTok video URLs for project 3
+  const tiktokVideoUrls: string[] = [
+    'https://www.tiktok.com/@kftcary/video/7380128258429357355?_r=1&_t=ZP-91LXaJENBqJ',
+    'https://www.tiktok.com/@kftcary/video/7409713137319988522?_r=1&_t=ZP-91LXfA9RVxX',
+    'https://www.tiktok.com/@kftcary/video/7509582197204995359?_r=1&_t=ZP-91LXrm2f95i',
+  ]
+
   return (
     <ProjectPageTemplate
-      title="Project 3"
-      tagline="Concept Stage"
-      videoSrc="https://www.w3schools.com/html/movie.mp4"
-      imageSources={[
-        'https://images.unsplash.com/photo-1520531158340-44015069e78e?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?auto=format&fit=crop&w=1200&q=80',
-      ]}
-      aboutText="Outline the concept, inspiration, target audience, and expected deliverables here."
+      title="Brand Campaign Development"
+      tagline="Creative Strategy & Concept"
+      videoSrc={videoSrc}
+      imageSources={imageSources}
+      additionalVideos={additionalVideos}
+      tiktokUsername="kftcary"
+      tiktokVideoUrls={tiktokVideoUrls}
+      projectNumber={3}
+      aboutText="This project represents an exploration into creative brand storytelling and campaign development. Drawing on my background in psychology and advertising, I'm developing concepts that apply consumer psychology principles to create meaningful connections between brands and their audiences. The project focuses on understanding target demographics, crafting compelling narratives, and designing campaigns that resonate on both emotional and practical levels."
       details={[
-        'Objective: Explore new formats',
-        'Role: Concept, Pre-production',
-        'Tools: FigJam, Notion, Storyboards',
+        'Objective: Develop creative brand campaigns using consumer psychology',
+        'Role: Creative Strategist, Concept Developer',
+        'Tools: Design Software, Research Tools, Storyboarding',
+        'Focus: Psychology-driven advertising strategies',
       ]}
     />
   )
