@@ -30,6 +30,7 @@ function TikTokCarousel({ videoUrls, username }: { videoUrls: string[]; username
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState<string | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
   const carouselRef = useRef<HTMLDivElement>(null)
   const touchStartX = useRef<number | null>(null)
   const touchEndX = useRef<number | null>(null)
@@ -105,6 +106,17 @@ function TikTokCarousel({ videoUrls, username }: { videoUrls: string[]; username
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [goToPrevious, goToNext])
+
+  // Mobile detection
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // Check if TikTok embeds loaded successfully
   useEffect(() => {
@@ -308,14 +320,14 @@ function TikTokCarousel({ videoUrls, username }: { videoUrls: string[]; username
             onClick={goToPrevious}
             style={{
               position: 'absolute',
-              left: '10px',
+              left: isMobile ? '5px' : '10px',
               top: '50%',
               transform: 'translateY(-50%)',
               background: 'rgba(255, 255, 255, 0.95)',
               border: '2px solid rgba(255, 255, 255, 0.5)',
               borderRadius: '50%',
-              width: '44px',
-              height: '44px',
+              width: isMobile ? '36px' : '44px',
+              height: isMobile ? '36px' : '44px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -323,12 +335,6 @@ function TikTokCarousel({ videoUrls, username }: { videoUrls: string[]; username
               transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
               boxShadow: '0 4px 15px rgba(0, 0, 0, 0.25)',
               zIndex: 10,
-              // Mobile responsive
-              '@media (max-width: 768px)': {
-                width: '36px',
-                height: '36px',
-                left: '5px',
-              },
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = 'rgba(255, 255, 255, 1)'
@@ -1349,20 +1355,19 @@ export default function ProjectPageTemplate({
                             const imageSrc = (projectNumber === 2 && isScreenshot) ? unencodedSrc : item.src
                             
                             return (
-                              <img
+                              <Image
                                 src={imageSrc}
                                 alt={`${title} image ${item.index + 1}${isScreenshot ? ' (Analytics)' : ''}`}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 50vw"
                                 style={{ 
-                                  width: '100%', 
-                                  height: '100%', 
                                   objectFit: 'cover',
                                   objectPosition: 'center',
-                                  display: 'block',
                                   borderRadius: '16px',
                                   transition: 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
                                   backgroundColor: 'rgba(255, 255, 255, 0.05)',
                                 }}
-                                loading={isLast ? 'eager' : 'lazy'}
+                                priority={isLast}
                                 onError={(e) => {
                                   console.error('Image failed to load:', {
                                     original: item.src,
@@ -1371,7 +1376,7 @@ export default function ProjectPageTemplate({
                                     isLast,
                                     isScreenshot
                                   })
-                                  const img = e.currentTarget
+                                  const img = e.currentTarget as HTMLImageElement
                                   // If we tried unencoded, try encoded
                                   if (imageSrc === unencodedSrc && imageSrc !== item.src) {
                                     console.log('Trying encoded path as fallback:', item.src)
@@ -1380,14 +1385,6 @@ export default function ProjectPageTemplate({
                                     // If we tried encoded, try unencoded
                                     console.log('Trying unencoded path as fallback:', unencodedSrc)
                                     img.src = unencodedSrc
-                                  } else {
-                                    // Show error state
-                                    img.style.background = 'rgba(255, 255, 255, 0.1)'
-                                    img.style.display = 'flex'
-                                    img.style.alignItems = 'center'
-                                    img.style.justifyContent = 'center'
-                                    img.style.color = '#0f2048'
-                                    img.alt = `Failed to load: ${item.src}`
                                   }
                                 }}
                                 onLoad={() => {
@@ -1483,15 +1480,14 @@ export default function ProjectPageTemplate({
                         }}
                       />
                     ) : (
-                      <img
+                      <Image
                         src={item.src}
                         alt={`${title} image ${item.index + 1}`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         style={{ 
-                          width: '100%', 
-                          height: '100%', 
                           objectFit: 'cover',
                           objectPosition: 'center',
-                          display: 'block',
                           borderRadius: '16px',
                           transition: 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
                         }}
@@ -1555,15 +1551,14 @@ export default function ProjectPageTemplate({
                         }}
                       />
                     ) : (
-                      <img
+                      <Image
                         src={item.src}
                         alt={`${title} image ${item.index + 1}`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         style={{ 
-                          width: '100%', 
-                          height: '100%', 
                           objectFit: 'cover',
                           objectPosition: 'center',
-                          display: 'block',
                           borderRadius: '16px',
                           transition: 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
                         }}
