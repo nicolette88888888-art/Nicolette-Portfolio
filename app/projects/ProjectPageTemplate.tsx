@@ -602,7 +602,7 @@ export default function ProjectPageTemplate({
     element.style.borderColor = 'rgba(255,255,255,0.7)'
     
     // Add image zoom effect
-    const img = element.querySelector('img, video')
+    const img = element.querySelector('img, video') as HTMLElement | null
     if (img) {
       img.style.transform = 'scale(1.1)'
       img.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)'
@@ -621,7 +621,7 @@ export default function ProjectPageTemplate({
     element.style.borderColor = 'rgba(255,255,255,0.3)'
     
     // Reset image zoom
-    const img = element.querySelector('img, video')
+    const img = element.querySelector('img, video') as HTMLElement | null
     if (img) {
       img.style.transform = 'scale(1)'
       img.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
@@ -1336,7 +1336,6 @@ export default function ProjectPageTemplate({
                             src={item.src}
                             controls
                             preload="metadata"
-                            loading="lazy"
                             style={{ 
                               width: '100%', 
                               height: '100%', 
