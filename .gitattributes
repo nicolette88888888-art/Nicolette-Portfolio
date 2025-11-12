@@ -1,2 +1,2 @@
 # Track large video files with Git LFS
-public/Project files/2/export_1689436621341.mov filter=lfs diff=lfs merge=lfs -text
+"public/Project files/2/export_1689436621341.mov" filter=lfs diff=lfs merge=lfs -text
