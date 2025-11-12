@@ -2,9 +2,7 @@
 
 A modern, responsive portfolio website showcasing the work and background of Nicolette Tandradinata, a Psychology and Advertising/Public Relations major at UNC Chapel Hill.
 
-**🌐 Live Portfolio**: [View Portfolio](https://nicolette88888888-art.github.io/Nicolette-Portfolio/) (or your deployed URL)
-
-**👨‍💻 Built with**: This portfolio was created with the assistance of [Cursor](https://cursor.sh/) AI coding assistant (Auto) - an AI-powered development tool that helps bring creative visions to life through code.
+**🌐 Live Portfolio**: [View Portfolio](https://nicolette-portfolio.vercep.app)
 
 ## 🚀 Features
 
