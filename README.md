@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website showcasing the work and background of Nicolette Tandradinata, a Psychology and Advertising/Public Relations major at UNC Chapel Hill.
 
-**🌐 Live Portfolio**: [View Portfolio](https://nicolette-portfolio.vercep.app)
+**🌐 Live Portfolio**: [View Portfolio](https://nicolette-portfolio.vercel.app)
 
 ## 🚀 Features
 
