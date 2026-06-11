@@ -2,6 +2,8 @@
 
 A personal portfolio website with a cozy café scrapbook aesthetic. Built with Next.js 15, TypeScript, Tailwind CSS, and Framer Motion.
 
+**Live Portfolio**: [nicolette-portfolio.vercel.app](https://nicolette-portfolio.vercel.app)
+
 ## Getting Started
 
 ```bash
