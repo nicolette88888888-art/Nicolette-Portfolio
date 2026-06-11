@@ -45,8 +45,9 @@ export default function HomePage() {
           <div className="relative flex justify-center items-center min-h-[400px]">
             <div className="absolute top-0 left-0 md:left-8">
               <Polaroid
-                alt="Nicolette"
-                caption="the barista ✿"
+                src="/images/nicolette.PNG"
+                alt="Nicolette Tandradinata"
+                caption="the creative vision ✿"
                 rotation={-6}
                 priority
               />
