@@ -49,7 +49,8 @@ export function MenuCard({ name, description, examples, className }: MenuCardPro
               {examples.map((example) => (
                 <li
                   key={example}
-                  className="text-sm font-handwritten text-espresso/80 dark:text-cream/80 list-disc"
+                  className="text-sm text-espresso/80 dark:text-cream/80 list-disc"
+                  style={{ fontFamily: '"Times New Roman", Times, serif' }}
                 >
                   {example}
                 </li>
