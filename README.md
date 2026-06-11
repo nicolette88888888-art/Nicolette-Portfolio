@@ -1,4 +1,4 @@
-# The Creative Café — Nicolette Tandradinata Portfolio
+# The Creative Café | Nicolette Tandradinata Portfolio
 
 A personal portfolio website with a cozy café scrapbook aesthetic. Built with Next.js 15, TypeScript, Tailwind CSS, and Framer Motion.
 
@@ -17,7 +17,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 | Route | Description |
 |-------|-------------|
-| `/` | Hero — café menu & scrapbook landing |
+| `/` | Hero: café menu & scrapbook landing |
 | `/who-am-i` | About scrapbook page |
 | `/menu` | Skills as café menu items |
 | `/portfolio` | Project case studies |
@@ -25,7 +25,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | `/brainstorms` | Interactive sticky-note brainstorm table |
 | `/blog` | Recipe-card style articles |
 | `/hobbies` | Hobbies & mock startup ideas |
-| `/gift-giving` | Gift giving love language |
+| `/goals` | Representation goals for everyone |
 | `/coffee-chat` | Contact form & links |
 
 ## Tech Stack

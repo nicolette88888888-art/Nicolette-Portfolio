@@ -3,7 +3,7 @@ import { hobbies } from '@/content/hobbies'
 import { PaperStack } from '@/components/ui/PaperStack'
 
 export const metadata = {
-  title: 'Hobbies — The Creative Café',
+  title: 'Hobbies | The Creative Café',
 }
 
 export default function HobbiesPage() {
@@ -18,7 +18,7 @@ export default function HobbiesPage() {
         </Link>
         <h1 className="section-title mt-4">Things That Could Accidentally Become Businesses</h1>
         <p className="mt-4 text-espresso/70 dark:text-cream/70">
-          The hobbies I love — and the startup ideas they inspire at 2am.
+          The hobbies I love, and the startup ideas they inspire at 2am.
         </p>
       </header>
 

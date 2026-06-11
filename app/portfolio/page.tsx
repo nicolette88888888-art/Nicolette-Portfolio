@@ -3,7 +3,7 @@ import { projects } from '@/content/projects'
 import { PaperStack } from '@/components/ui/PaperStack'
 
 export const metadata = {
-  title: 'Portfolio — The Creative Café',
+  title: 'Portfolio | The Creative Café',
 }
 
 export default function PortfolioPage() {

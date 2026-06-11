@@ -48,9 +48,9 @@ const sacramento = Sacramento({
 })
 
 export const metadata: Metadata = {
-  title: 'The Creative Café — Nicolette Tandradinata',
+  title: 'The Creative Café | Nicolette Tandradinata',
   description:
-    'Marketing, design, content creation, and storytelling — step into Nicolette Tandradinata\'s creative brain through a cozy café portfolio.',
+    'Marketing, design, content creation, and storytelling. Step into Nicolette Tandradinata\'s creative brain through a cozy café portfolio.',
   icons: {
     icon: '/images/IMG_7847.JPG',
   },

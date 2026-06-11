@@ -2,7 +2,7 @@ import { blogPosts } from '@/content/blog'
 import { RecipeCard } from '@/components/ui/RecipeCard'
 
 export const metadata = {
-  title: 'Blog — The Creative Café',
+  title: 'Blog | The Creative Café',
 }
 
 export default function BlogPage() {

@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props) {
   const post = getBlogPostBySlug(slug)
   if (!post) return { title: 'Not Found' }
   return {
-    title: `${post.title} — Blog`,
+    title: `${post.title} | Blog`,
     description: post.content[0],
   }
 }

@@ -15,7 +15,7 @@ export function CafeFooter() {
           </div>
           <div className="flex flex-wrap gap-4 justify-center text-sm">
             <Link href="/hobbies" className="hover:text-dusty transition-colors">Hobbies</Link>
-            <Link href="/gift-giving" className="hover:text-dusty transition-colors">Gift Giving</Link>
+            <Link href="/goals" className="hover:text-dusty transition-colors">Goals</Link>
             <Link href="/coffee-chat" className="hover:text-dusty transition-colors">Coffee Chat</Link>
           </div>
         </div>

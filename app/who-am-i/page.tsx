@@ -5,7 +5,7 @@ import { StickyNote } from '@/components/ui/StickyNote'
 import { Polaroid } from '@/components/ui/Polaroid'
 
 export const metadata = {
-  title: 'Who Am I? — The Creative Café',
+  title: 'Who Am I? | The Creative Café',
 }
 
 export default function WhoAmIPage() {
@@ -59,8 +59,8 @@ export default function WhoAmIPage() {
         <Link href="/hobbies" className="cafe-button bg-butter text-espresso hover:bg-butter/80">
           Things That Could Become Businesses →
         </Link>
-        <Link href="/gift-giving" className="cafe-button bg-dusty/60 text-espresso hover:bg-dusty/80">
-          My Love Language →
+        <Link href="/goals" className="cafe-button bg-dusty/60 text-espresso hover:bg-dusty/80">
+          Representation for Everyone →
         </Link>
       </div>
     </section>

@@ -3,7 +3,7 @@ import { MenuCard } from '@/components/ui/MenuCard'
 import { PaperStack } from '@/components/ui/PaperStack'
 
 export const metadata = {
-  title: 'The Menu — The Creative Café',
+  title: 'The Menu | The Creative Café',
 }
 
 export default function MenuPage() {

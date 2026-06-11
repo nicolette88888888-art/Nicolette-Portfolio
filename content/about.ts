@@ -31,7 +31,7 @@ export const aboutContent = {
     {
       title: 'Philosophy',
       content:
-        'I believe that the best marketing doesn\'t feel like marketing — it feels like a story someone needed to hear. Every project is a chance to connect, represent, and create something meaningful.',
+        'I believe that the best marketing doesn\'t feel like marketing. It feels like a story someone needed to hear. Every project is a chance to connect, represent, and create something meaningful.',
     },
   ],
 }

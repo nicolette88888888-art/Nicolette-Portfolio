@@ -23,6 +23,11 @@ const nextConfig = {
         destination: '/portfolio/community-engagement',
         permanent: true,
       },
+      {
+        source: '/gift-giving',
+        destination: '/goals',
+        permanent: true,
+      },
     ]
   },
 }

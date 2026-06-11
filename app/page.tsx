@@ -23,7 +23,7 @@ export default function HomePage() {
           <div className="relative">
             <PaperClip className="absolute -top-4 left-8 z-10" />
             <PaperStack>
-              <p className="font-handwritten text-2xl text-dusty mb-2">Welcome in —</p>
+              <p className="font-handwritten text-2xl text-dusty mb-2">Welcome in,</p>
               <h1 className="section-title leading-tight">
                 The Creative Café
               </h1>

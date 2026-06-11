@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props) {
   const brainstorm = getBrainstormBySlug(slug)
   if (!brainstorm) return { title: 'Not Found' }
   return {
-    title: `${brainstorm.title} — Brainstorms`,
+    title: `${brainstorm.title} | Brainstorms`,
     description: brainstorm.excerpt,
   }
 }

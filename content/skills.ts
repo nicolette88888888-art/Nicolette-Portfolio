@@ -24,7 +24,7 @@ export const menuSections: MenuSection[] = [
       },
       {
         name: 'Content Creation',
-        description: 'From concept to final cut — short-form video is my specialty.',
+        description: 'From concept to final cut, short-form video is my specialty.',
         examples: ['Personal brand TikToks', 'Brand partnership content', 'Trend-driven edits'],
       },
       {

@@ -2,7 +2,7 @@ import { brainstorms } from '@/content/brainstorms'
 import { StickyNote } from '@/components/ui/StickyNote'
 
 export const metadata = {
-  title: 'Brainstorms — The Creative Café',
+  title: 'Brainstorms | The Creative Café',
 }
 
 export default function BrainstormsPage() {
