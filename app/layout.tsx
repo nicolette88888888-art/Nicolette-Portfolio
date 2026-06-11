@@ -1,8 +1,17 @@
 import type { Metadata } from 'next'
-import React from 'react'
-import { Inter, Playfair_Display } from 'next/font/google'
+import {
+  Inter,
+  Playfair_Display,
+  Cormorant_Garamond,
+  Caveat,
+  Sacramento,
+} from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
+import { ThemeProvider } from '@/components/providers/ThemeProvider'
+import { CafeMenuNav } from '@/components/layout/CafeMenuNav'
+import { CafeFooter } from '@/components/layout/CafeFooter'
+import { EasterEggs } from '@/components/easter-eggs/EasterEggs'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -12,14 +21,36 @@ const inter = Inter({
 
 const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
-  variable: '--font-playfair-display',
+  variable: '--font-playfair',
   display: 'swap',
-  weight: ['400', '700', '900'],
+  weight: ['400', '700'],
+})
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  variable: '--font-cormorant',
+  display: 'swap',
+  weight: ['400', '600', '700'],
+})
+
+const caveat = Caveat({
+  subsets: ['latin'],
+  variable: '--font-caveat',
+  display: 'swap',
+  weight: ['400', '700'],
+})
+
+const sacramento = Sacramento({
+  subsets: ['latin'],
+  variable: '--font-sacramento',
+  display: 'swap',
+  weight: '400',
 })
 
 export const metadata: Metadata = {
-  title: 'Nicolette Tandradinata - Creative Portfolio',
-  description: 'Portfolio of Nicolette Tandradinata, Psychology and Advertising/Public Relations major at UNC Chapel Hill. Creative professional specializing in media creation, social media, and marketing.',
+  title: 'The Creative Café — Nicolette Tandradinata',
+  description:
+    'Marketing, design, content creation, and storytelling — step into Nicolette Tandradinata\'s creative brain through a cozy café portfolio.',
   icons: {
     icon: '/images/IMG_7847.JPG',
   },
@@ -31,22 +62,30 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfairDisplay.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${inter.variable} ${playfairDisplay.variable} ${cormorant.variable} ${caveat.variable} ${sacramento.variable}`}
+    >
       <head>
-        {/* Preconnect to TikTok for faster embed loading */}
         <link rel="preconnect" href="https://www.tiktok.com" />
         <link rel="dns-prefetch" href="https://www.tiktok.com" />
       </head>
-      <body>
-        {/* Preload TikTok embed script early for faster loading on project pages */}
+      <body className="min-h-screen flex flex-col paper-texture">
+        <ThemeProvider>
+          <CafeMenuNav />
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+          <CafeFooter />
+          <EasterEggs />
+        </ThemeProvider>
         <Script
           src="https://www.tiktok.com/embed.js"
           strategy="afterInteractive"
           id="tiktok-embed-script"
         />
-        {children}
       </body>
     </html>
   )
 }
-
