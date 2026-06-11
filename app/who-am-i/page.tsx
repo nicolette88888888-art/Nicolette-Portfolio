@@ -29,7 +29,12 @@ export default function WhoAmIPage() {
       </header>
 
       <div className="flex justify-center mb-12">
-        <Polaroid alt="Nicolette" caption="UNC '26" rotation={-2} />
+        <Polaroid
+          src="/images/nicolette.png"
+          alt="Nicolette Tandradinata"
+          caption="UNC '26"
+          rotation={-2}
+        />
       </div>
 
       <div className="grid sm:grid-cols-3 gap-4 mb-12">

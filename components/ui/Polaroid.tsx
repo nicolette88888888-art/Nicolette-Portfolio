@@ -17,7 +17,7 @@ export function Polaroid({ src, alt, caption, rotation = -3, className, priority
   return (
     <motion.div
       className={cn(
-        'bg-white p-3 pb-10 shadow-polaroid relative',
+        'bg-white p-3 pb-10 shadow-polaroid relative shrink-0 w-48 sm:w-52 md:w-56',
         className
       )}
       style={{ rotate: `${rotation}deg` }}

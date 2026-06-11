@@ -42,14 +42,15 @@ export default function HomePage() {
             </PaperStack>
           </div>
 
-          <div className="relative flex justify-center items-center min-h-[400px]">
-            <div className="absolute top-0 left-0 md:left-8">
+          <div className="relative flex justify-center items-center min-h-[420px] w-full">
+            <div className="relative z-10 top-0 left-0 md:left-8">
               <Polaroid
-                src="/images/nicolette.PNG"
+                src="/images/nicolette.png"
                 alt="Nicolette Tandradinata"
                 caption="the creative vision ✿"
                 rotation={-6}
                 priority
+                className="w-56 md:w-64"
               />
             </div>
             <div className="absolute bottom-0 right-0 md:right-8">
