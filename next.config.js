@@ -20,7 +20,17 @@ const nextConfig = {
       },
       {
         source: '/projects/project-4',
-        destination: '/portfolio/community-engagement',
+        destination: '/portfolio',
+        permanent: true,
+      },
+      {
+        source: '/portfolio/community-engagement',
+        destination: '/portfolio',
+        permanent: true,
+      },
+      {
+        source: '/portfolio/personal-content',
+        destination: '/portfolio',
         permanent: true,
       },
       {

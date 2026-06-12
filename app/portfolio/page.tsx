@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import { projects } from '@/content/projects'
-import { PaperStack } from '@/components/ui/PaperStack'
+import { projects, isFeaturedProject } from '@/content/projects'
+import { FeaturedPortfolioCard } from '@/components/portfolio/FeaturedPortfolioCard'
+import { PortfolioRoleCard } from '@/components/portfolio/PortfolioRoleCard'
 
 export const metadata = {
   title: 'Portfolio | The Creative Café',
@@ -17,26 +17,14 @@ export default function PortfolioPage() {
         </p>
       </header>
 
-      <div className="grid md:grid-cols-2 gap-8">
-        {projects.map((project, i) => (
-          <Link
-            key={project.slug}
-            href={`/portfolio/${project.slug}`}
-            className={`block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dusty rounded-lg ${i % 2 === 1 ? 'md:mt-8' : ''}`}
-          >
-            <PaperStack>
-              <p className="font-handwritten text-lg text-dusty">{project.tagline}</p>
-              <h2 className="font-display text-2xl font-bold text-espresso dark:text-cream mt-1">
-                {project.title}
-              </h2>
-              <div className="mt-4 space-y-2 text-sm text-espresso/70 dark:text-cream/70">
-                <p><span className="font-semibold">Goal:</span> {project.goal}</p>
-                <p><span className="font-semibold">Outcome:</span> {project.outcome}</p>
-              </div>
-              <p className="mt-4 font-handwritten text-espresso/60">read the full special →</p>
-            </PaperStack>
-          </Link>
-        ))}
+      <div className="space-y-12">
+        {projects.map((project) =>
+          isFeaturedProject(project) ? (
+            <FeaturedPortfolioCard key={project.slug} project={project} />
+          ) : (
+            <PortfolioRoleCard key={project.slug} project={project} />
+          )
+        )}
       </div>
     </section>
   )
