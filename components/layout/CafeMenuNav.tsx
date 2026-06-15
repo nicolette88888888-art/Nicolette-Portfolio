@@ -9,10 +9,10 @@ import { ThemeToggle } from './ThemeToggle'
 const navItems = [
   { label: 'Home', href: '/' },
   { label: 'Who Am I?', href: '/who-am-i' },
+  { label: 'Portfolio', href: '/portfolio' },
   { label: 'The Menu', href: '/menu' },
   { label: 'Brainstorms', href: '/brainstorms' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Portfolio', href: '/portfolio' },
   { label: 'Coffee Chat', href: '/coffee-chat' },
 ]
 

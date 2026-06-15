@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: Props) {
   const post = getBlogPostBySlug(slug)
   if (!post) return { title: 'Not Found' }
   return {
-    title: `${post.title} | Blog`,
-    description: post.content[0],
+    title: `${post.title} | Thoughts from the Coffee Shop`,
+    description: post.excerpt,
   }
 }
 
@@ -32,29 +32,12 @@ export default async function BlogArticlePage({ params }: Props) {
         href="/blog"
         className="inline-flex items-center gap-2 font-handwritten text-lg text-espresso/70 hover:text-dusty mb-8 transition-colors"
       >
-        ← Back to recipes
+        ← Back to the coffee shop
       </Link>
 
-      <PaperStack>
-        <p className="font-handwritten text-xl text-dusty">Recipe for an Idea</p>
+      <PaperStack className="notebook-paper">
+        <p className="font-handwritten text-xl text-dusty">from my corner table</p>
         <h1 className="section-title text-3xl md:text-4xl mt-2">{post.title}</h1>
-
-        <div className="mt-6 p-4 bg-butter/20 dark:bg-butter/10 rounded-lg border border-dashed border-espresso/20">
-          <p className="text-sm">
-            <span className="font-semibold">Prep Time:</span>{' '}
-            <span className="font-handwritten text-lg">{post.prepTime}</span>
-          </p>
-          <p className="text-sm mt-2">
-            <span className="font-semibold">Ingredients:</span>
-          </p>
-          <ul className="flex flex-wrap gap-2 mt-1">
-            {post.ingredients.map((ing) => (
-              <li key={ing} className="px-2 py-0.5 bg-white/60 dark:bg-espresso/40 rounded-full font-handwritten text-sm">
-                {ing}
-              </li>
-            ))}
-          </ul>
-        </div>
 
         <div className="mt-8 space-y-6">
           {post.content.map((paragraph, i) => (
@@ -63,6 +46,18 @@ export default async function BlogArticlePage({ params }: Props) {
             </p>
           ))}
         </div>
+
+        {post.relatedBrainstorm && (
+          <p className="mt-10 pt-6 border-t border-dashed border-espresso/15 dark:border-cream/15">
+            <span className="font-handwritten text-lg text-dusty">related brainstorm: </span>
+            <Link
+              href={`/brainstorms/${post.relatedBrainstorm}`}
+              className="text-espresso dark:text-cream underline decoration-dusty/50 hover:decoration-dusty transition-colors"
+            >
+              pull up a chair and read more
+            </Link>
+          </p>
+        )}
       </PaperStack>
     </article>
   )
