@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { blogPosts, getBlogPostBySlug } from '@/content/blog'
 import { PaperStack } from '@/components/ui/PaperStack'
+import { FormattedText } from '@/components/ui/FormattedText'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -42,7 +43,7 @@ export default async function BlogArticlePage({ params }: Props) {
         <div className="mt-8 space-y-6">
           {post.content.map((paragraph, i) => (
             <p key={i} className="text-espresso/80 dark:text-cream/80 leading-relaxed text-lg">
-              {paragraph}
+              <FormattedText text={paragraph} />
             </p>
           ))}
         </div>

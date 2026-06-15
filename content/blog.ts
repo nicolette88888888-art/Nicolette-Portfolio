@@ -13,12 +13,12 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       'To me, New York has never been a city. It has never been just New York; it has always been more. For a while, I could not figure out what drew me so strongly to such a city.',
     content: [
-      'To me, New York has never been a city. It\'s never been just New York; it has always been more.',
-      'To me, it was New York.',
+      'To me, New York has never been *a* city. It\'s never been *just* New York; it has always been more.',
+      'To me, it was *New York*.',
       'For a while, I couldn\'t figure out what drew me strongly to such a city. I was from the suburbs of North Carolina and was blessed with a charming Southern childhood. To my ex-boyfriend, New York felt like the opposite of this life, almost appalling.',
       'I have been told by many people that I would hate it there and quickly move back.',
       'But, I would like to at least be given the chance to hate it first.',
-      'I am not sure where this obsession first started, to be honest. Maybe it was Sex in the City, with their heels and endless friendships, or even Sesame Street.',
+      'I am not sure where this obsession first started, to be honest. Maybe it was *Sex in the City*, with their heels and endless friendships, or even *Sesame Street*.',
       'Although I am very partial to Charlotte, I do believe it was Elmo that must have subconsciously set the trajectory of my own ambitions onto New York.',
       'I suppose this idea of endless opportunities and possibilities of finding lifelong friends there has swayed me, too.',
       'I think to me, New York meant freedom. The city gives off American dreams and independence, if anything. So, New York meant being me.',
@@ -27,7 +27,7 @@ export const blogPosts: BlogPost[] = [
       'I want to live so much in this life. They talk about a New York minute as if it transcends all laws of physics. A minute in New York is different, it\'s expensive, time is money, and money is spent fast. In a single moment, people are bustling, trading millions, and rushing to events that create memories that last a lifetime.',
       'This is the life I want.',
       'To be a part of a living, breathing city. Something greater than just myself.',
-      'The goal was always New York. But the city was always more. It means being able to say I did it. It means I am chasing my dreams, and I am striving for a life where I get to experience culture on every corner and meet people brought together by the same ambitions I hold.',
+      'The goal was always *New York*. But the city was always more. It means being able to say I did it. It means I am chasing my dreams, and I am striving for a life where I get to experience culture on every corner and meet people brought together by the same ambitions I hold.',
     ],
   },
   {
